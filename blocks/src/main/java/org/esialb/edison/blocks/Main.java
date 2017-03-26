@@ -44,15 +44,21 @@ public class Main {
 			play();
 			return false;
 		}));
-		mainMenu.add(new MenuItem("Quit Game", (b) -> { quit(); return true; }));
+		mainMenu.add(new MenuItem("Sleep", (b) -> { sleep(); return false; }));
 		for(;;) {
 			mainMenu.show();
 		}
 	}
 	
-	private static void quit() {
+	private static void sleep() {
 		new OledImage().paint();
-		System.exit(0);
+		Map<Button, Boolean> bp = null;
+		while(!(bp = SFOled.pressed(bp)).values().contains(true)) {
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+			}
+		}
 	}
 	
 	private static void play() {
@@ -85,8 +91,9 @@ public class Main {
 					;
 				Menu pauseMenu = new Menu();
 				pauseMenu.add(new MenuItem("Resume"));
+				pauseMenu.add(new MenuItem("Sleep", (b) -> { sleep(); return false; }));
 				pauseMenu.add(new MenuItem("Quit to Menu"));
-				if(pauseMenu.show() == 1)
+				if(pauseMenu.show() == 2)
 					return;
 			} else if(held.get(Button.LEFT) == 1)
 				c = Command.HARD_DROP;
