@@ -8,6 +8,8 @@ import org.eviline.core.Configuration;
 import org.eviline.core.Engine;
 import org.eviline.core.Field;
 
+import com.robinkirkman.edison.sfo.Menu;
+import com.robinkirkman.edison.sfo.MenuItem;
 import com.robinkirkman.edison.sfo.SFOled;
 import com.robinkirkman.edison.sfo.SFOled.Button;
 
@@ -22,14 +24,21 @@ public class Main {
 		commands.put(Button.B, Command.ROTATE_RIGHT);
 	}
 	
-	public static void main(String[] args) throws Exception {
-		
-		Configuration conf = new Configuration(null, 0);
-		Field field = new Field();
-		Engine engine = new Engine(field, conf);
+	private static Configuration conf = new Configuration(null, 0);
+	private static Field field = new Field();
+	private static Engine engine = new Engine(field, conf);
+	private static EngineDraw draw = new EngineDraw(engine);
+	static {
 		engine.setHoldEnabled(true);
-		EngineDraw draw = new EngineDraw(engine);
-		
+	}
+
+	public static void main(String[] args) throws Exception {
+		play();
+		System.exit(0);
+	}
+	
+	private static void play() {
+		engine.reset();
 		engine.tick(Command.NOP);
 		
 		Map<Button, Boolean> bp = null;
@@ -47,7 +56,15 @@ public class Main {
 				else
 					held.put(b, 0);
 			}
-			if(held.get(Button.LEFT) == 1)
+			if(held.get(Button.A) > 0 && held.get(Button.B) > 0) {
+				while((bp = SFOled.pressed(bp)).containsValue(true))
+					;
+				Menu pauseMenu = new Menu();
+				pauseMenu.add(new MenuItem("Resume"));
+				pauseMenu.add(new MenuItem("Quit"));
+				if(pauseMenu.show() == 1)
+					return;
+			} else if(held.get(Button.LEFT) == 1)
 				c = Command.HARD_DROP;
 			else if(held.get(Button.DOWN) == 1)
 				c = Command.SHIFT_LEFT;
@@ -70,7 +87,10 @@ public class Main {
 			else
 				c = Command.NOP;
 			engine.tick(c);
-			Thread.sleep(1000/60);
+			try {
+				Thread.sleep(1000/60);
+			} catch (InterruptedException e) {
+			}
 			Map<Button, Boolean> t = prevBp;
 			prevBp = bp;
 			bp = t;
@@ -79,4 +99,5 @@ public class Main {
 		draw.draw();
 		SFOled.display();
 	}
+	
 }
