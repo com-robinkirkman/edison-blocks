@@ -10,6 +10,7 @@ import org.eviline.core.Field;
 
 import com.robinkirkman.edison.sfo.Menu;
 import com.robinkirkman.edison.sfo.MenuItem;
+import com.robinkirkman.edison.sfo.OledImage;
 import com.robinkirkman.edison.sfo.SFOled;
 import com.robinkirkman.edison.sfo.SFOled.Button;
 
@@ -33,7 +34,19 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws Exception {
-		play();
+		Menu mainMenu = new Menu();
+		mainMenu.add(new MenuItem("Play Blocks", (b) -> {
+			play();
+			return false;
+		}));
+		mainMenu.add(new MenuItem("Quit Game", (b) -> { quit(); return true; }));
+		for(;;) {
+			mainMenu.show();
+		}
+	}
+	
+	private static void quit() {
+		new OledImage().paint();
 		System.exit(0);
 	}
 	
@@ -61,7 +74,7 @@ public class Main {
 					;
 				Menu pauseMenu = new Menu();
 				pauseMenu.add(new MenuItem("Resume"));
-				pauseMenu.add(new MenuItem("Quit"));
+				pauseMenu.add(new MenuItem("Quit to Menu"));
 				if(pauseMenu.show() == 1)
 					return;
 			} else if(held.get(Button.LEFT) == 1)

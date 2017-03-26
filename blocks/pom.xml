@@ -5,6 +5,7 @@
 	<artifactId>blocks</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
+		<finalName>blocks</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
