@@ -40,28 +40,32 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		Menu mainMenu = new Menu();
-		mainMenu.add(new MenuItem("Play Blocks", (b) -> {
-			play();
-			return false;
-		}));
-		mainMenu.add(new MenuItem("Sleep", (b) -> { sleep(); return false; }));
-		for(;;) {
-			mainMenu.show();
-		}
+		mainMenu.add(new MenuItem("Play Blocks", (b) -> play()));
+		mainMenu.add(new MenuItem("Sleep", (b) -> sleep()));
+		mainMenu.add(new MenuItem("Quit", (b) -> quit()));
+		mainMenu.show();
+		System.exit(0);
 	}
 	
-	private static void sleep() {
+	private static boolean quit() {
+		return true;
+	}
+	
+	private static boolean sleep() {
 		new OledImage().paint();
 		Map<Button, Boolean> bp = null;
 		while(!(bp = SFOled.pressed(bp)).values().contains(true)) {
 			try {
-				Thread.sleep(200);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 			}
 		}
+		while((bp = SFOled.pressed(bp)).containsValue(true))
+			;
+		return false;
 	}
 	
-	private static void play() {
+	private static boolean play() {
 		engine.reset();
 		
 		Map<Button, Boolean> bp = null;
@@ -94,7 +98,7 @@ public class Main {
 				pauseMenu.add(new MenuItem("Sleep", (b) -> { sleep(); return false; }));
 				pauseMenu.add(new MenuItem("Quit to Menu"));
 				if(pauseMenu.show() == 2)
-					return;
+					return false;
 			} else if(held.get(Button.LEFT) == 1)
 				c = Command.HARD_DROP;
 			else if(held.get(Button.DOWN) == 1)
@@ -137,6 +141,8 @@ public class Main {
 		while((bp = SFOled.pressed(bp)).containsValue(true))
 			;
 		SFOled.awaitClick();
+		
+		return false;
 	}
 	
 }
