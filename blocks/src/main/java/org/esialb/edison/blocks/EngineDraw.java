@@ -11,10 +11,10 @@ import org.eviline.core.Shape;
 import org.eviline.core.ShapeType;
 import org.eviline.core.XYShapes;
 
-import com.robinkirkman.edison.sfo.OledDataBuffer;
-import com.robinkirkman.edison.sfo.OledImage;
-import com.robinkirkman.edison.sfo.OledRaster;
-import com.robinkirkman.edison.sfo.SFOled;
+import org.esialb.edison.sfo.OledDataBuffer;
+import org.esialb.edison.sfo.OledImage;
+import org.esialb.edison.sfo.OledRaster;
+import org.esialb.edison.sfo.SFOled;
 
 public class EngineDraw {
 	protected OledImage image;

@@ -10,11 +10,11 @@ import org.eviline.core.EngineFactories;
 import org.eviline.core.Field;
 import org.eviline.core.ss.EvilBag7NShapeSource;
 
-import com.robinkirkman.edison.sfo.Menu;
-import com.robinkirkman.edison.sfo.MenuItem;
-import com.robinkirkman.edison.sfo.OledImage;
-import com.robinkirkman.edison.sfo.SFOled;
-import com.robinkirkman.edison.sfo.SFOled.Button;
+import org.esialb.edison.sfo.Menu;
+import org.esialb.edison.sfo.MenuItem;
+import org.esialb.edison.sfo.OledImage;
+import org.esialb.edison.sfo.SFOled;
+import org.esialb.edison.sfo.SFOled.Button;
 
 public class Main {
 	
@@ -35,7 +35,7 @@ public class Main {
 		mainMenu.add(new MenuItem("Sleep", (b, s) -> sleep()));
 		mainMenu.add(new MenuItem("Quit", (b, s) -> quit()));
 		mainMenu.show();
-		if("true".equals(System.getProperty("oled.swing")))
+		if(SFOled.isSwing())
 			System.exit(0);
 	}
 	

@@ -66,9 +66,9 @@
 			<version>1.7.25</version>
 		</dependency>
 		<dependency>
-			<groupId>com.robinkirkman.edison</groupId>
+			<groupId>org.esialb.edison</groupId>
 			<artifactId>sparkfun-oled-block-shaded</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eviline</groupId>
