@@ -54,16 +54,16 @@ public class EngineDraw {
 					fill = true;
 				else if(engine.getShape() != -1 && XYShapes.has(engine.getShape(), x, y))
 					fill = true;
-				else if(engine.getGhost() != -1 && XYShapes.has(engine.getGhost(), x, y))
-					fill = engine.getTickCount() % 2 == 1;
 				if(fill) {
 					g.fillRect(1+3*y, 1+3*(field.WIDTH - x - 1), 3, 3);
-				}
+				} else if(engine.getGhost() != -1 && XYShapes.has(engine.getGhost(), x, y))
+					g.drawRect(2+3*y, 2+3*(field.WIDTH - x - 1), 0, 0);
+
 			}
 		}
 		
 		ShapeType[] next = engine.getNext();
-		if(next.length > 0)
+		if(next.length > 0 && next[0] != null)
 			drawShapeType(next[0], 0, 36);
 		
 		ShapeType held = engine.getHold();

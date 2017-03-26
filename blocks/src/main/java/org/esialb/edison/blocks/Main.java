@@ -56,13 +56,18 @@ public class Main {
 		Map<Button, Boolean> bp = null;
 		Map<Button, Boolean> prevBp = null;
 		Map<Button, Integer> held = new EnumMap<>(Button.class);
+
+		draw.draw();
+		SFOled.display();
 		
 		Command c = Command.NOP;
 		while(!engine.isOver()) {
-			while(engine.getShape() == -1)
-				engine.tick(Command.NOP);
-			draw.draw();
-			SFOled.display();
+			if(engine.getShape() == -1) {
+				while(engine.getShape() == -1)
+					engine.tick(Command.NOP);
+				draw.draw();
+				SFOled.display();
+			}
 			bp = SFOled.pressed(bp);
 			for(Button b : bp.keySet()) {
 				if(bp.get(b))
@@ -101,6 +106,10 @@ public class Main {
 			else
 				c = Command.NOP;
 			engine.tick(c);
+			if(c != Command.NOP) {
+				draw.draw();
+				SFOled.display();
+			}
 			try {
 				Thread.sleep(1000/60);
 			} catch (InterruptedException e) {
