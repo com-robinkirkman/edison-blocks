@@ -17,8 +17,6 @@ import com.robinkirkman.edison.sfo.OledRaster;
 import com.robinkirkman.edison.sfo.SFOled;
 
 public class EngineDraw {
-	protected static int drawCount = 0;
-
 	protected OledImage image;
 	protected Graphics2D g;
 	
@@ -32,11 +30,7 @@ public class EngineDraw {
 		g.setFont(Font.decode(Font.MONOSPACED).deriveFont(10f));
 	}
 	
-	public void draw() {
-		OledDataBuffer odb = (OledDataBuffer) image.getRaster().getDataBuffer();
-		SFOled.read(odb.getBuffer());
-		
-		drawCount++;
+	public void paint() {
 		
 		Field field = engine.getField();
 		
@@ -71,8 +65,20 @@ public class EngineDraw {
 			drawShapeType(held, 58, 36);
 		
 		g.drawString("" + engine.getLines(), 12, 47);
+
+		if(engine.isOver()) {
+			int xo = 2;
+			int yo = 9;
+			int w = g.getFontMetrics().stringWidth("Game Over") + 2;
+			int h = g.getFontMetrics().getHeight();
+			g.setColor(Color.BLACK);
+			g.fillRect(xo + 0, yo + 0, w + 2, h + 2);
+			g.setColor(Color.WHITE);
+			g.drawRect(xo + 0, yo + 0, w + 1, h + 1);
+			g.drawString("Game Over", xo + 2, yo + h - g.getFontMetrics().getDescent());
+		}
 		
-		SFOled.write(odb.getBuffer());
+		image.paint();
 	}
 	
 	private void drawShapeType(ShapeType type, int x, int y) {

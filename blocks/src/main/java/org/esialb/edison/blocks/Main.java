@@ -68,7 +68,7 @@ public class Main {
 		Map<Button, Boolean> prevBp = null;
 		Map<Button, Integer> held = new EnumMap<>(Button.class);
 
-		draw.draw();
+		draw.paint();
 		SFOled.display();
 		
 		Command c = Command.NOP;
@@ -76,7 +76,7 @@ public class Main {
 			if(engine.getShape() == -1) {
 				while(engine.getShape() == -1)
 					engine.tick(Command.NOP);
-				draw.draw();
+				draw.paint();
 				SFOled.display();
 			}
 			bp = SFOled.pressed(bp);
@@ -119,7 +119,7 @@ public class Main {
 				c = Command.NOP;
 			engine.tick(c);
 			if(c != Command.NOP) {
-				draw.draw();
+				draw.paint();
 				SFOled.display();
 			}
 			try {
@@ -131,8 +131,12 @@ public class Main {
 			bp = t;
 		}
 		
-		draw.draw();
+		draw.paint();
 		SFOled.display();
+		
+		while((bp = SFOled.pressed(bp)).containsValue(true))
+			;
+		SFOled.awaitClick();
 	}
 	
 }
