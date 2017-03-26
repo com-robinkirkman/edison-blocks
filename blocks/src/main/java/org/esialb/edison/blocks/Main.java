@@ -6,7 +6,9 @@ import java.util.Map;
 import org.eviline.core.Command;
 import org.eviline.core.Configuration;
 import org.eviline.core.Engine;
+import org.eviline.core.EngineFactories;
 import org.eviline.core.Field;
+import org.eviline.core.ss.EvilBag7NShapeSource;
 
 import com.robinkirkman.edison.sfo.Menu;
 import com.robinkirkman.edison.sfo.MenuItem;
@@ -25,7 +27,10 @@ public class Main {
 		commands.put(Button.B, Command.ROTATE_RIGHT);
 	}
 	
-	private static Configuration conf = new Configuration(null, 0);
+	private static Configuration conf = new Configuration(
+			EngineFactories.createIntegerFactory(null),
+			EngineFactories.createIntegerFactory(0),
+			EvilBag7NShapeSource.createFactory(3, 2));
 	private static Field field = new Field();
 	private static Engine engine = new Engine(field, conf);
 	private static EngineDraw draw = new EngineDraw(engine);
