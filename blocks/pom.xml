@@ -76,12 +76,4 @@
 			<version>2.1.7</version>
 		</dependency>
 	</dependencies>
-	<repositories>
-		<repository>
-			<id>edison-blocks</id>
-			<url>https://raw.githubusercontent.com/esialb/edison-blocks/master/maven2/</url>
-			<releases/>
-			<snapshots/>
-		</repository>
-	</repositories>
 </project>
