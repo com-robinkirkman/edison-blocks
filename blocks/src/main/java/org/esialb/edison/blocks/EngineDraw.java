@@ -72,9 +72,9 @@ public class EngineDraw {
 			int w = g.getFontMetrics().stringWidth("Game Over") + 2;
 			int h = g.getFontMetrics().getHeight();
 			g.setColor(Color.BLACK);
-			g.fillRect(xo + 0, yo + 0, w + 2, h + 2);
+			g.fillRect(xo + 0, yo + 0, w + 2, h + 0);
 			g.setColor(Color.WHITE);
-			g.drawRect(xo + 0, yo + 0, w + 1, h + 1);
+			g.drawRect(xo + 0, yo + 0, w + 1, h - 1);
 			g.drawString("Game Over", xo + 2, yo + h - g.getFontMetrics().getDescent());
 		}
 		
