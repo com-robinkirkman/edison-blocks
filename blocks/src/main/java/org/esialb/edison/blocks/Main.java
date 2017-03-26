@@ -31,9 +31,9 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		Menu mainMenu = new Menu();
-		mainMenu.add(new MenuItem("Play Blocks", (b) -> play()));
-		mainMenu.add(new MenuItem("Sleep", (b) -> sleep()));
-		mainMenu.add(new MenuItem("Quit", (b) -> quit()));
+		mainMenu.add(new MenuItem("Play Blocks", (b, s) -> play()));
+		mainMenu.add(new MenuItem("Sleep", (b, s) -> sleep()));
+		mainMenu.add(new MenuItem("Quit", (b, s) -> quit()));
 		mainMenu.show();
 		if("true".equals(System.getProperty("oled.swing")))
 			System.exit(0);
@@ -87,7 +87,7 @@ public class Main {
 					;
 				Menu pauseMenu = new Menu();
 				pauseMenu.add(new MenuItem("Resume"));
-				pauseMenu.add(new MenuItem("Sleep", (b) -> sleep()));
+				pauseMenu.add(new MenuItem("Sleep", (b, s) -> sleep()));
 				pauseMenu.add(new MenuItem("Quit to Menu"));
 				if(pauseMenu.show() == 2)
 					return false;

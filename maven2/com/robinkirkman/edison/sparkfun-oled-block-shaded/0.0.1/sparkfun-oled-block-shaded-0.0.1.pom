@@ -3,7 +3,7 @@
   <parent>
     <artifactId>sparkfun-oled-block-parent</artifactId>
     <groupId>com.robinkirkman.edison</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <relativePath>../sparkfun-oled-block-parent/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
