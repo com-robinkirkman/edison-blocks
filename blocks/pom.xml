@@ -79,7 +79,7 @@
 	<repositories>
 		<repository>
 			<id>edison-blocks</id>
-			<url>https://github.com/esialb/edison-blocks/maven2/</url>
+			<url>https://github.com/esialb/edison-blocks/tree/master/maven2/</url>
 			<releases/>
 			<snapshots/>
 		</repository>
