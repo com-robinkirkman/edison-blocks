@@ -44,7 +44,8 @@ public class Main {
 		mainMenu.add(new MenuItem("Sleep", (b) -> sleep()));
 		mainMenu.add(new MenuItem("Quit", (b) -> quit()));
 		mainMenu.show();
-		System.exit(0);
+		if("true".equals(System.getProperty("oled.swing")))
+			System.exit(0);
 	}
 	
 	private static boolean quit() {
@@ -95,7 +96,7 @@ public class Main {
 					;
 				Menu pauseMenu = new Menu();
 				pauseMenu.add(new MenuItem("Resume"));
-				pauseMenu.add(new MenuItem("Sleep", (b) -> { sleep(); return false; }));
+				pauseMenu.add(new MenuItem("Sleep", (b) -> sleep()));
 				pauseMenu.add(new MenuItem("Quit to Menu"));
 				if(pauseMenu.show() == 2)
 					return false;
