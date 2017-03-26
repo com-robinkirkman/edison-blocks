@@ -52,7 +52,6 @@ public class Main {
 	
 	private static void play() {
 		engine.reset();
-		engine.tick(Command.NOP);
 		
 		Map<Button, Boolean> bp = null;
 		Map<Button, Boolean> prevBp = null;
@@ -60,6 +59,8 @@ public class Main {
 		
 		Command c = Command.NOP;
 		while(!engine.isOver()) {
+			while(engine.getShape() == -1)
+				engine.tick(Command.NOP);
 			draw.draw();
 			SFOled.display();
 			bp = SFOled.pressed(bp);

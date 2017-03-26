@@ -52,8 +52,10 @@ public class EngineDraw {
 				boolean fill = false;
 				if(field.masked(x, y))
 					fill = true;
-				if(engine.getShape() != -1 && XYShapes.has(engine.getShape(), x, y))
+				else if(engine.getShape() != -1 && XYShapes.has(engine.getShape(), x, y))
 					fill = true;
+				else if(engine.getGhost() != -1 && XYShapes.has(engine.getGhost(), x, y))
+					fill = engine.getTickCount() % 2 == 1;
 				if(fill) {
 					g.fillRect(1+3*y, 1+3*(field.WIDTH - x - 1), 3, 3);
 				}
