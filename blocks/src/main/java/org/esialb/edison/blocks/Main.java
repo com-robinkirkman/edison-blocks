@@ -17,15 +17,6 @@ import com.robinkirkman.edison.sfo.SFOled;
 import com.robinkirkman.edison.sfo.SFOled.Button;
 
 public class Main {
-	private static final Map<Button, Command> commands = new EnumMap<>(Button.class);
-	static {
-		commands.put(Button.UP, Command.HARD_DROP);
-		commands.put(Button.DOWN, Command.SHIFT_DOWN);
-		commands.put(Button.LEFT, Command.SHIFT_LEFT);
-		commands.put(Button.RIGHT, Command.SHIFT_RIGHT);
-		commands.put(Button.A, Command.ROTATE_LEFT);
-		commands.put(Button.B, Command.ROTATE_RIGHT);
-	}
 	
 	private static Configuration conf = new Configuration(
 			EngineFactories.createIntegerFactory(null),
