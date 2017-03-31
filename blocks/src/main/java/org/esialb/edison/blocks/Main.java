@@ -58,6 +58,7 @@ public class Main {
 	}
 	
 	private static boolean quit() {
+		System.exit(0);
 		return true;
 	}
 	
