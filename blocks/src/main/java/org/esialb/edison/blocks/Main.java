@@ -31,9 +31,27 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		Menu mainMenu = new Menu();
-		mainMenu.add(new MenuItem("Play Blocks", (b, s) -> play()));
-		mainMenu.add(new MenuItem("Sleep", (b, s) -> sleep()));
-		mainMenu.add(new MenuItem("Quit", (b, s) -> quit()));
+		mainMenu.add(new MenuItem("Play Blocks", new MenuItem.MenuAction() {
+			@Override
+			public boolean perform(Button button, MenuItem source) {
+				return play();
+			}
+			
+		}));
+		mainMenu.add(new MenuItem("Sleep", new MenuItem.MenuAction() {
+			@Override
+			public boolean perform(Button button, MenuItem source) {
+				return sleep();
+			}
+			
+		}));
+		mainMenu.add(new MenuItem("Quit", new MenuItem.MenuAction() {
+			@Override
+			public boolean perform(Button button, MenuItem source) {
+				return quit();
+			}
+			
+		}));
 		mainMenu.show();
 		if(SFOled.isSwing())
 			System.exit(0);
@@ -62,7 +80,7 @@ public class Main {
 		
 		Map<Button, Boolean> bp = null;
 		Map<Button, Boolean> prevBp = null;
-		Map<Button, Integer> held = new EnumMap<>(Button.class);
+		Map<Button, Integer> held = new EnumMap<Button, Integer>(Button.class);
 
 		draw.paint();
 		SFOled.display();
@@ -78,7 +96,7 @@ public class Main {
 			bp = SFOled.pressed(bp);
 			for(Button b : bp.keySet()) {
 				if(bp.get(b))
-					held.put(b, 1 + held.getOrDefault(b, 0));
+					held.put(b, 1 + (held.containsKey(b) ? held.get(b) : 0));
 				else
 					held.put(b, 0);
 			}
@@ -87,7 +105,13 @@ public class Main {
 					;
 				Menu pauseMenu = new Menu();
 				pauseMenu.add(new MenuItem("Resume"));
-				pauseMenu.add(new MenuItem("Sleep", (b, s) -> sleep()));
+				pauseMenu.add(new MenuItem("Sleep", new MenuItem.MenuAction() {
+					@Override
+					public boolean perform(Button button, MenuItem source) {
+						return sleep();
+					}
+					
+				}));
 				pauseMenu.add(new MenuItem("Quit to Menu"));
 				if(pauseMenu.show() == 2)
 					return false;
