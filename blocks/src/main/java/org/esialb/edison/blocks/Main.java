@@ -53,12 +53,10 @@ public class Main {
 			
 		}));
 		mainMenu.show();
-		if(SFOled.isSwing())
-			System.exit(0);
+		System.exit(0);
 	}
 	
 	private static boolean quit() {
-		System.exit(0);
 		return true;
 	}
 	
