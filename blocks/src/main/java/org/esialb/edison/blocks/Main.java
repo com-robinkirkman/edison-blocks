@@ -61,7 +61,7 @@ public class Main {
 	}
 	
 	private static boolean sleep() {
-		new OledImage().paint();
+		SFOled.createImage().paint();
 		Map<Button, Boolean> bp = null;
 		while(!(bp = SFOled.pressed(bp)).values().contains(true)) {
 			try {

@@ -25,7 +25,7 @@ public class EngineDraw {
 	
 	public EngineDraw(Engine engine) {
 		this.engine = engine;
-		image = new OledImage();
+		image = SFOled.createImage();
 		g = image.createGraphics();
 		g.setFont(Font.decode(Font.MONOSPACED).deriveFont(10f));
 	}
