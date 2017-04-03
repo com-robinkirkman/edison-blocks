@@ -40,7 +40,7 @@ public class EngineDraw {
 		multi.paint(true);
 		image = multi;
 		g = image.createGraphics();
-		g.setFont(Font.decode(Font.MONOSPACED).deriveFont(10f));
+		g.setFont(Font.decode(Font.MONOSPACED).deriveFont(16f));
 	}
 	
 	public void paint() {
@@ -68,18 +68,24 @@ public class EngineDraw {
 
 			}
 		}
+		
+		g.drawString("NEXT", 128, 15);
+		g.drawString("LINE", 128, 39);
+		g.drawString("HOLD", 128, 63);
+		
 		ShapeType[] next = engine.getNext();
 		for(int i = 0; i < next.length; i++) {
 			if(next[i] == null)
 				break;
-			drawShapeType(next[i], 128 + 16 * i, 0);
+			drawShapeType(next[i], 192 + 16 * i, 0);
 		}
+
+		g.drawString("" + engine.getLines(), 192, 39);
 		
 		ShapeType held = engine.getHold();
 		if(held != null)
-			drawShapeType(held, 128, 48);
+			drawShapeType(held, 192, 48);
 		
-		g.drawString("" + engine.getLines(), 128, 40);
 
 		if(engine.isOver()) {
 			int xo = 2;
@@ -100,7 +106,7 @@ public class EngineDraw {
 		for(int ix = 0; ix < 4; ix++) {
 			for(int iy = 0; iy < 4; iy++) {
 				if(shape.has(3 - iy, ix))
-					g.fillRect(x+3*ix, y + 3*iy, 3, 3);
+					g.fillRect(x+4*ix, y + 4*iy, 4, 4);
 			}
 		}
 	}
