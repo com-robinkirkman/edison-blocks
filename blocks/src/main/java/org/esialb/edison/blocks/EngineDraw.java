@@ -11,6 +11,11 @@ import org.eviline.core.Shape;
 import org.eviline.core.ShapeType;
 import org.eviline.core.XYShapes;
 
+import mraa.I2c;
+
+import org.esialb.edison.sfo.I2cOled;
+import org.esialb.edison.sfo.MultiOledImage;
+import org.esialb.edison.sfo.Multiplexer;
 import org.esialb.edison.sfo.OledDataBuffer;
 import org.esialb.edison.sfo.OledImage;
 import org.esialb.edison.sfo.OledRaster;
@@ -25,7 +30,15 @@ public class EngineDraw {
 	
 	public EngineDraw(Engine engine) {
 		this.engine = engine;
-		image = SFOled.createImage();
+		
+		I2c i2c = new I2c(1);
+		Multiplexer mx = new Multiplexer(i2c, (short) 0x70);
+		
+		MultiOledImage multi = new MultiOledImage(256, 64);
+		multi.add(new I2cOled(i2c, mx.selector(1)).begin().createImage(), 0, 0);
+		multi.add(new I2cOled(i2c, mx.selector(0)).begin().createImage(), 128, 0);
+		multi.paint(true);
+		image = multi;
 		g = image.createGraphics();
 		g.setFont(Font.decode(Font.MONOSPACED).deriveFont(10f));
 	}
@@ -34,11 +47,11 @@ public class EngineDraw {
 		
 		Field field = engine.getField();
 		
-		int bh = 3 * field.HEIGHT;
-		int bw = 3 * field.WIDTH;
+		int bh = 6 * field.HEIGHT;
+		int bw = 6 * field.WIDTH;
 		
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 64, 48);
+		g.fillRect(0, 0, image.getWidth(), image.getHeight());
 		g.setColor(Color.WHITE);
 		g.drawRect(0, 0, bh+1, bw+1);
 		for(int y = 0; y < field.HEIGHT; y++) {
@@ -49,22 +62,24 @@ public class EngineDraw {
 				else if(engine.getShape() != -1 && XYShapes.has(engine.getShape(), x, y))
 					fill = true;
 				if(fill) {
-					g.fillRect(1+3*y, 1+3*(field.WIDTH - x - 1), 3, 3);
+					g.fillRect(1+6*y, 1+6*(field.WIDTH - x - 1), 6, 6);
 				} else if(engine.getGhost() != -1 && XYShapes.has(engine.getGhost(), x, y))
-					g.drawRect(2+3*y, 2+3*(field.WIDTH - x - 1), 0, 0);
+					g.drawRect(2+6*y, 2+6*(field.WIDTH - x - 1), 2, 2);
 
 			}
 		}
-		
 		ShapeType[] next = engine.getNext();
-		if(next.length > 0 && next[0] != null)
-			drawShapeType(next[0], 0, 36);
+		for(int i = 0; i < next.length; i++) {
+			if(next[i] == null)
+				break;
+			drawShapeType(next[i], 128 + 16 * i, 0);
+		}
 		
 		ShapeType held = engine.getHold();
 		if(held != null)
-			drawShapeType(held, 58, 36);
+			drawShapeType(held, 128, 48);
 		
-		g.drawString("" + engine.getLines(), 12, 47);
+		g.drawString("" + engine.getLines(), 128, 40);
 
 		if(engine.isOver()) {
 			int xo = 2;
@@ -77,7 +92,6 @@ public class EngineDraw {
 			g.drawRect(xo + 0, yo + 0, w + 1, h - 1);
 			g.drawString("Game Over", xo + 2, yo + h - g.getFontMetrics().getDescent());
 		}
-		
 		image.paint();
 	}
 	
