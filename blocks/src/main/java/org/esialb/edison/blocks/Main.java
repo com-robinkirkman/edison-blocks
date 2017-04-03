@@ -82,6 +82,7 @@ public class Main {
 		Map<Button, Integer> held = new EnumMap<Button, Integer>(Button.class);
 
 		draw.paint();
+		SFOled.write(new byte[SFOled.BUFFER_SIZE]);
 		SFOled.display();
 		
 		Command c = Command.NOP;
@@ -139,7 +140,6 @@ public class Main {
 			engine.tick(c);
 			if(c != Command.NOP) {
 				draw.paint();
-				SFOled.display();
 			}
 			try {
 				Thread.sleep(1000/60);
@@ -151,7 +151,6 @@ public class Main {
 		}
 		
 		draw.paint();
-		SFOled.display();
 		
 		while((bp = SFOled.pressed(bp)).containsValue(true))
 			;

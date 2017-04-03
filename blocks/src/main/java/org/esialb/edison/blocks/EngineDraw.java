@@ -88,10 +88,10 @@ public class EngineDraw {
 		
 
 		if(engine.isOver()) {
-			int xo = 2;
-			int yo = 9;
 			int w = g.getFontMetrics().stringWidth("Game Over") + 2;
 			int h = g.getFontMetrics().getHeight();
+			int xo = (128 - w) / 2 - 4;
+			int yo = (64 - h) / 2 - 2;
 			g.setColor(Color.BLACK);
 			g.fillRect(xo + 0, yo + 0, w + 2, h + 0);
 			g.setColor(Color.WHITE);
