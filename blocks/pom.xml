@@ -5,7 +5,6 @@
 	<artifactId>blocks</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
-		<finalName>blocks</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -42,6 +41,15 @@
 									<mainClass>org.esialb.edison.blocks.Main</mainClass>
 								</transformer>
 							</transformers>
+							<artifactSet>
+								<excludes>
+									<exclude>io.mraa:*</exclude>
+									<exclude>io.mraa.upm:*</exclude>
+								</excludes>
+							</artifactSet>
+							<shadedArtifactAttached>true</shadedArtifactAttached>
+							<finalName>blocks</finalName>
+							<createDependencyReducedPom>false</createDependencyReducedPom>
 						</configuration>
 					</execution>
 				</executions>
