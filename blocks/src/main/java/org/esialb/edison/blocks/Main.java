@@ -118,6 +118,7 @@ public class Main {
 					draw.clear();
 					return false;
 				}
+				draw.paint();
 			} else if(held.get(Button.LEFT) == 1)
 				c = Command.HARD_DROP;
 			else if(held.get(Button.DOWN) == 1)
