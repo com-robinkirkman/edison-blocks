@@ -110,4 +110,10 @@ public class EngineDraw {
 			}
 		}
 	}
+	
+	public void clear() {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, image.getWidth(), image.getHeight());
+		image.paint();
+	}
 }
