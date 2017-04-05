@@ -109,13 +109,16 @@ public class Main {
 				pauseMenu.add(new MenuItem("Sleep", new MenuItem.MenuAction() {
 					@Override
 					public boolean perform(Button button, MenuItem source) {
+						draw.clear();
 						return sleep();
 					}
 					
 				}));
 				pauseMenu.add(new MenuItem("Quit to Menu"));
-				if(pauseMenu.show() == 2)
+				if(pauseMenu.show() == 2) {
+					draw.clear();
 					return false;
+				}
 			} else if(held.get(Button.LEFT) == 1)
 				c = Command.HARD_DROP;
 			else if(held.get(Button.DOWN) == 1)
@@ -157,6 +160,7 @@ public class Main {
 			;
 		SFOled.awaitClick();
 		
+		draw.clear();
 		return false;
 	}
 	
