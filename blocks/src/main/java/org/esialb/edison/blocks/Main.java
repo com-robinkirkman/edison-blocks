@@ -57,6 +57,7 @@ public class Main {
 	}
 	
 	private static boolean quit() {
+		draw.clear();
 		return true;
 	}
 	
