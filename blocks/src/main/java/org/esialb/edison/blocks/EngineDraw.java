@@ -35,8 +35,8 @@ public class EngineDraw {
 		Multiplexer mx = new Multiplexer(i2c, (short) 0x70);
 		
 		MultiOledImage multi = new MultiOledImage(256, 64);
-		multi.add(new I2cOled(i2c, mx.selector(1)).begin().createImage(), 0, 0);
-		multi.add(new I2cOled(i2c, mx.selector(0)).begin().createImage(), 128, 0);
+		multi.add(new I2cOled(i2c, mx.selector(3)).begin().createImage(), 0, 0);
+		multi.add(new I2cOled(i2c, mx.selector(4)).begin().createImage(), 128, 0);
 		multi.paint(true);
 		image = multi;
 		g = image.createGraphics();
