@@ -20,7 +20,7 @@ public class Main {
 	
 	private static Configuration conf = new Configuration(
 			EngineFactories.createIntegerFactory(null),
-			EngineFactories.createIntegerFactory(0),
+			EngineFactories.createIntegerFactory(1),
 			EvilBag7NShapeSource.createFactory(3, 2));
 	private static Field field = new Field();
 	private static Engine engine = new Engine(field, conf);
