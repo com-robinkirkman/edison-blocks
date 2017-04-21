@@ -8,6 +8,8 @@ import org.eviline.core.Configuration;
 import org.eviline.core.Engine;
 import org.eviline.core.EngineFactories;
 import org.eviline.core.Field;
+import org.eviline.core.ai.ForkJoinAIKernel;
+import org.eviline.core.ai.NextFitness;
 import org.eviline.core.ss.EvilBag7NShapeSource;
 
 import org.esialb.edison.sfo.Menu;
@@ -21,7 +23,7 @@ public class Main {
 	private static Configuration conf = new Configuration(
 			EngineFactories.createIntegerFactory(null),
 			EngineFactories.createIntegerFactory(1),
-			EvilBag7NShapeSource.createFactory(3, 2));
+			EvilBag7NShapeSource.createFactory(3, 2, new ForkJoinAIKernel(new NextFitness())));
 	private static Field field = new Field();
 	private static Engine engine = new Engine(field, conf);
 	private static EngineDraw draw = new EngineDraw(engine);
