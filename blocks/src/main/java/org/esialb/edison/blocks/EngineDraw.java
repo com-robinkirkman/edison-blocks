@@ -135,14 +135,14 @@ public class EngineDraw {
 		}
 
 		g.setColor(Color.BLACK);
-		g.fillRect(76, 20, 20, 24);
+		g.fillRect(68, 20, 28, 24);
 		g.setColor(Color.WHITE);
 		g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 12));
-		g.drawString("" + engine.getLines(), 76, 38);
+		g.drawString("" + engine.getLines(), 68, 38);
 		
 		g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 8));
-		g.drawString("NEXT", 76, 8);
-		g.drawString("HOLD", 76, 63);
+		g.drawString("NEXT", 68, 8);
+		g.drawString("HOLD", 68, 63);
 
 		if(engine.isOver()) {
 			int xo = 2;
@@ -160,11 +160,11 @@ public class EngineDraw {
 
 		ShapeType[] next = engine.getNext();
 		if(next.length > 0 && next[0] != null)
-			drawShapeTypeGfx(next[0], 48, 4);
+			drawShapeTypeGfx(next[0], 40, 4);
 		
 		ShapeType held = engine.getHold();
 		if(held != null)
-			drawShapeTypeGfx(held, 48, 36);
+			drawShapeTypeGfx(held, 40, 36);
 		
 	}
 	
