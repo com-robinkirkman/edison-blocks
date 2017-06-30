@@ -1,5 +1,6 @@
 package org.esialb.edison.blocks;
 
+import java.awt.Color;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -33,16 +34,19 @@ public class Main {
 	static {
 		engine.setHoldEnabled(true);
 	}
+	private static TeensyMaster teensyMaster; 
 	private static EngineDraw draw;
 	static {
 		I2c i2c = new I2c(1);
 		i2c.frequency(I2cMode.I2C_FAST);
-		TeensyMaster master = TeensyMaster.newTeensyMaster(i2c);
-		draw = new EngineDraw(engine, master.gfx0);
+		teensyMaster = TeensyMaster.newTeensyMaster(i2c);
+		draw = new EngineDraw(engine, teensyMaster.gfx0);
 	}
 
 	public static void main(String[] args) throws Exception {
 		SFOled.begin();
+		
+		teensyMaster.gfx0.fillRect(0, 0, 96, 64, Color.BLACK);
 		
 		Menu mainMenu = new Menu();
 		mainMenu.add(new MenuItem("Play Blocks", new MenuItem.MenuAction() {
