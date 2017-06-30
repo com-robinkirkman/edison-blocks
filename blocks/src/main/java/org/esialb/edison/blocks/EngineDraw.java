@@ -149,7 +149,6 @@ public class EngineDraw {
 			g.drawString("Game Over", xo + 2, yo + h - g.getFontMetrics().getDescent());
 		}
 		
-		gfx.fillRect(0, 0, 96, 4, Color.BLACK);
 		gfxFromImage = gfx.drawImage(toImage, gfxFromImage);
 
 		ShapeType[] next = engine.getNext();
@@ -176,7 +175,7 @@ public class EngineDraw {
 		Shape shape = type.start();
 		for(int ix = 0; ix < 4; ix++) {
 			for(int iy = 0; iy < 4; iy++) {
-				Color c = (shape.has(ix, iy) ? shapeTypeColor.get(type) : Color.BLACK);
+				Color c = (shape.has(ix, 3 - iy) ? shapeTypeColor.get(type) : Color.BLACK);
 				gfx.fillRect(x+6*ix, y + 6*iy, 6, 6, c);
 			}
 		}
