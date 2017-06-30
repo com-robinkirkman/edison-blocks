@@ -191,7 +191,7 @@ public class EngineDraw {
 		}
 		
 		int pixelHeight = 6 * (maxY - minY + 1);
-		int offsetY = (24 - pixelHeight) / 2;
+		int offsetY = (24 - pixelHeight) / 2 - 6 * minY;
 		
 		for(int ix = 0; ix < 4; ix++) {
 			for(int iy = 0; iy < 4; iy++) {
