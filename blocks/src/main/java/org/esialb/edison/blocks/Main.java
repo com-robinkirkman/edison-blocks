@@ -40,7 +40,7 @@ public class Main {
 		I2c i2c = new I2c(1);
 		i2c.frequency(I2cMode.I2C_FAST);
 		teensyMaster = TeensyMaster.newTeensyMaster(i2c);
-		draw = new EngineDraw(engine, teensyMaster.gfx0);
+		draw = new EngineDraw(engine, teensyMaster.gfx1);
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -147,9 +147,9 @@ public class Main {
 				c = Command.SHIFT_RIGHT;
 			else if(held.get(Button.DOWN) > 10)
 				c = Command.AUTOSHIFT_RIGHT;
-			else if(held.get(Button.A) == 1)
-				c = Command.ROTATE_RIGHT;
 			else if(held.get(Button.B) == 1)
+				c = Command.ROTATE_RIGHT;
+			else if(held.get(Button.A) == 1)
 				c = Command.ROTATE_LEFT;
 			else if(held.get(Button.RIGHT) == 1)
 				c = Command.SHIFT_DOWN;
