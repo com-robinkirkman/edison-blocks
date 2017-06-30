@@ -42,6 +42,8 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws Exception {
+		SFOled.begin();
+		
 		Menu mainMenu = new Menu();
 		mainMenu.add(new MenuItem("Play Blocks", new MenuItem.MenuAction() {
 			@Override
