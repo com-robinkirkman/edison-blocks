@@ -35,6 +35,7 @@ public class EngineDraw {
 	
 	public EngineDraw(Engine engine, SSD1331 gfx) {
 		this.engine = engine;
+		this.gfx = gfx;
 		image = SFOled.createImage();
 		g = image.createGraphics();
 		g.setFont(Font.decode(Font.MONOSPACED).deriveFont(10f));
