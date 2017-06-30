@@ -180,10 +180,23 @@ public class EngineDraw {
 	
 	private void drawShapeTypeGfx(ShapeType type, int x, int y) {
 		Shape shape = type.start();
+		int minY = 4, maxY = -1;
+		for(int ix = 0; ix < 4; ix++) {
+			for(int iy = 0; iy < 4; iy++) {
+				if(shape.has(ix, 3 - iy)) {
+					minY = Math.min(minY, iy);
+					maxY = Math.max(maxY, iy);
+				}
+			}
+		}
+		
+		int pixelHeight = 6 * (maxY - minY + 1);
+		int offsetY = (24 - pixelHeight) / 2;
+		
 		for(int ix = 0; ix < 4; ix++) {
 			for(int iy = 0; iy < 4; iy++) {
 				Color c = (shape.has(ix, 3 - iy) ? shapeTypeColor.get(type) : Color.BLACK);
-				gfx.fillRect(x+6*ix, y + 6*iy, 6, 6, c);
+				gfx.fillRect(x+6*ix, offsetY + y + 6*iy, 6, 6, c);
 			}
 		}
 	}
