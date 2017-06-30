@@ -120,6 +120,7 @@ public class Main {
 					held.put(b, 0);
 			}
 			if(held.get(Button.A) > 0 && held.get(Button.B) > 0) {
+				draw.clear();
 				while((bp = SFOled.pressed(bp)).containsValue(true))
 					;
 				Menu pauseMenu = new Menu();
@@ -134,7 +135,6 @@ public class Main {
 				}));
 				pauseMenu.add(new MenuItem("Quit to Menu"));
 				if(pauseMenu.show() == 2) {
-					draw.clear();
 					return false;
 				}
 				draw.paint();

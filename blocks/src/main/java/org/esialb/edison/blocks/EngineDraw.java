@@ -188,5 +188,6 @@ public class EngineDraw {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, image.getWidth(), image.getHeight());
 		image.paint();
+		gfx.fillRect(0, 0, 96, 64, Color.BLACK);
 	}
 }
