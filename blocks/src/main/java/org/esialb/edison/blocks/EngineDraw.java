@@ -27,7 +27,6 @@ public class EngineDraw {
 	protected Engine engine;
 	
 	protected SSD1331 gfx;
-	protected Image gfxFromImage;
 	
 	public EngineDraw(Engine engine) {
 		this(engine, null);
@@ -134,17 +133,15 @@ public class EngineDraw {
 			}
 		}
 
-/*
 		ShapeType[] next = engine.getNext();
 		if(next.length > 0 && next[0] != null)
-			drawShapeType(next[0], 0, 36);
+			drawShapeTypeGfx(next[0], 48, 0);
 		
 		ShapeType held = engine.getHold();
 		if(held != null)
-			drawShapeType(held, 58, 36);
+			drawShapeTypeGfx(held, 48, 32);
 		
-		g.drawString("" + engine.getLines(), 12, 47);
- */
+		g.drawString("" + engine.getLines(), 80, 0);
 
 		if(engine.isOver()) {
 			int xo = 2;
@@ -158,7 +155,7 @@ public class EngineDraw {
 			g.drawString("Game Over", xo + 2, yo + h - g.getFontMetrics().getDescent());
 		}
 		
-		gfxFromImage = gfx.drawImage(toImage, gfxFromImage);
+		gfx.drawImage(toImage, null);
 	}
 	
 	private void drawShapeType(ShapeType type, int x, int y) {
@@ -167,6 +164,16 @@ public class EngineDraw {
 			for(int iy = 0; iy < 4; iy++) {
 				if(shape.has(iy, ix))
 					g.fillRect(x+3*ix, y + 3*iy, 3, 3);
+			}
+		}
+	}
+	
+	private void drawShapeTypeGfx(ShapeType type, int x, int y) {
+		Shape shape = type.start();
+		for(int ix = 0; ix < 4; ix++) {
+			for(int iy = 0; iy < 4; iy++) {
+				if(shape.has(iy, ix))
+					gfx.fillRect(x+6*ix, y + 6*iy, 6, 6, shapeTypeColor.get(type));
 			}
 		}
 	}
