@@ -60,9 +60,9 @@ public class EngineDraw {
 				else if(engine.getShape() != -1 && XYShapes.has(engine.getShape(), x, y))
 					fill = true;
 				if(fill) {
-					g.fillRect(1+3*y, 32 - (1+3*(field.WIDTH - x - 1)), 3, 3);
+					g.fillRect(1+3*y, 30 - (1+3*(field.WIDTH - x - 1)), 3, 3);
 				} else if(engine.getGhost() != -1 && XYShapes.has(engine.getGhost(), x, y))
-					g.drawRect(2+3*y, 32 - (2+3*(field.WIDTH - x - 1)), 0, 0);
+					g.drawRect(2+3*y, 30 - (2+3*(field.WIDTH - x - 1)), 0, 0);
 
 			}
 		}
