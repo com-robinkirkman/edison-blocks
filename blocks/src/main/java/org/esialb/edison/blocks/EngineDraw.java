@@ -133,14 +133,7 @@ public class EngineDraw {
 			}
 		}
 
-		ShapeType[] next = engine.getNext();
-		if(next.length > 0 && next[0] != null)
-			drawShapeTypeGfx(next[0], 48, 0);
-		
-		ShapeType held = engine.getHold();
-		if(held != null)
-			drawShapeTypeGfx(held, 48, 32);
-		
+		g.setColor(Color.WHITE);
 		g.drawString("" + engine.getLines(), 80, 0);
 
 		if(engine.isOver()) {
@@ -156,6 +149,15 @@ public class EngineDraw {
 		}
 		
 		gfx.drawImage(toImage, null);
+
+		ShapeType[] next = engine.getNext();
+		if(next.length > 0 && next[0] != null)
+			drawShapeTypeGfx(next[0], 48, 0);
+		
+		ShapeType held = engine.getHold();
+		if(held != null)
+			drawShapeTypeGfx(held, 48, 32);
+		
 	}
 	
 	private void drawShapeType(ShapeType type, int x, int y) {
