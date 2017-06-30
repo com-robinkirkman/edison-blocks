@@ -140,8 +140,8 @@ public class EngineDraw {
 		g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 12));
 		g.drawString("" + engine.getLines(), 76, 38);
 		
-		g.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 6));
-		g.drawString("NEXT", 76, 6);
+		g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 8));
+		g.drawString("NEXT", 76, 8);
 		g.drawString("HOLD", 76, 63);
 
 		if(engine.isOver()) {
