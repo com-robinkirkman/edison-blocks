@@ -12,11 +12,15 @@ import org.eviline.core.ai.ForkJoinAIKernel;
 import org.eviline.core.ai.NextFitness;
 import org.eviline.core.ss.EvilBag7NShapeSource;
 
+import mraa.I2c;
+import mraa.I2cMode;
+
 import org.esialb.edison.sfo.Menu;
 import org.esialb.edison.sfo.MenuItem;
 import org.esialb.edison.sfo.OledImage;
 import org.esialb.edison.sfo.SFOled;
 import org.esialb.edison.sfo.SFOled.Button;
+import org.esialb.teensy.i2c.master.TeensyMaster;
 
 public class Main {
 	
@@ -26,9 +30,15 @@ public class Main {
 			EvilBag7NShapeSource.createFactory(3, 2, new ForkJoinAIKernel(new NextFitness())));
 	private static Field field = new Field();
 	private static Engine engine = new Engine(field, conf);
-	private static EngineDraw draw = new EngineDraw(engine);
 	static {
 		engine.setHoldEnabled(true);
+	}
+	private static EngineDraw draw;
+	static {
+		I2c i2c = new I2c(1);
+		i2c.frequency(I2cMode.I2C_FAST);
+		TeensyMaster master = TeensyMaster.newTeensyMaster(i2c);
+		draw = new EngineDraw(engine, master.gfx0);
 	}
 
 	public static void main(String[] args) throws Exception {
