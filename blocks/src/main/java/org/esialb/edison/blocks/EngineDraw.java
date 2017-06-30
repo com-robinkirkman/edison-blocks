@@ -139,6 +139,10 @@ public class EngineDraw {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 12));
 		g.drawString("" + engine.getLines(), 76, 38);
+		
+		g.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 6));
+		g.drawString("NEXT", 76, 6);
+		g.drawString("HOLD", 76, 63);
 
 		if(engine.isOver()) {
 			int xo = 2;
