@@ -183,7 +183,7 @@ public class EngineDraw {
 		int minY = 4, maxY = -1;
 		for(int ix = 0; ix < 4; ix++) {
 			for(int iy = 0; iy < 4; iy++) {
-				if(shape.has(ix, 3 - iy)) {
+				if(shape.has(3 - ix, iy)) {
 					minY = Math.min(minY, iy);
 					maxY = Math.max(maxY, iy);
 				}
@@ -195,7 +195,7 @@ public class EngineDraw {
 		
 		for(int ix = 0; ix < 4; ix++) {
 			for(int iy = 0; iy < 4; iy++) {
-				Color c = (shape.has(ix, 3 - iy) ? shapeTypeColor.get(type) : Color.BLACK);
+				Color c = (shape.has(3 - ix, iy) ? shapeTypeColor.get(type) : Color.BLACK);
 				gfx.fillRect(x+6*ix, offsetY + y + 6*iy, 6, 6, c);
 			}
 		}
