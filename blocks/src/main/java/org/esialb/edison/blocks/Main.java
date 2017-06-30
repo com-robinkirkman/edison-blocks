@@ -47,6 +47,7 @@ public class Main {
 		SFOled.begin();
 		
 		teensyMaster.gfx0.fillRect(0, 0, 96, 64, Color.BLACK);
+		teensyMaster.gfx1.fillRect(0, 0, 96, 64, Color.BLACK);
 		
 		Menu mainMenu = new Menu();
 		mainMenu.add(new MenuItem("Play Blocks", new MenuItem.MenuAction() {
