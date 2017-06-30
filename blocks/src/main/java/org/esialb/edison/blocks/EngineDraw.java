@@ -129,10 +129,7 @@ public class EngineDraw {
 				} else if(engine.getGhost() != -1 && XYShapes.has(engine.getGhost(), x, y)) {
 					c = shapeTypeColor.get(XYShapes.shapeFromInt(engine.getShape()).type());
 					g.setColor(c);
-					g.drawRect(1+3*(field.WIDTH - x - 1), 1+3*y, 0, 0);
-					g.drawRect(1+3*(field.WIDTH - x - 1), 3+3*y, 0, 0);
-					g.drawRect(3+3*(field.WIDTH - x - 1), 1+3*y, 0, 0);
-					g.drawRect(3+3*(field.WIDTH - x - 1), 3+3*y, 0, 0);
+					g.drawRect(1+3*(field.WIDTH - x - 1), 1+3*y, 2, 2);
 				}
 			}
 		}
