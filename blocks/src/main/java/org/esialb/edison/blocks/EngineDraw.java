@@ -12,7 +12,7 @@ import org.eviline.core.Field;
 import org.eviline.core.Shape;
 import org.eviline.core.ShapeType;
 import org.eviline.core.XYShapes;
-
+import org.eviline.swing.ShapeTypeColor;
 import org.esialb.edison.sfo.OledDataBuffer;
 import org.esialb.edison.sfo.OledImage;
 import org.esialb.edison.sfo.OledRaster;
@@ -94,6 +94,8 @@ public class EngineDraw {
 		paintGfx();
 	}
 	
+	private ShapeTypeColor shapeTypeColor = new ShapeTypeColor();
+	
 	private void paintGfx() {
 		if(gfx == null)
 			return;
@@ -113,15 +115,22 @@ public class EngineDraw {
 		for(int y = 0; y < field.HEIGHT; y++) {
 			for(int x = 0; x < field.WIDTH; x++) {
 				boolean fill = false;
-				if(field.masked(x, y))
+				Color c = null;
+				if(field.masked(x, y)) {
+					c = shapeTypeColor.get(field.block(x, y).shape().type());
 					fill = true;
-				else if(engine.getShape() != -1 && XYShapes.has(engine.getShape(), x, y))
+				} else if(engine.getShape() != -1 && XYShapes.has(engine.getShape(), x, y)) {
+					c = shapeTypeColor.get(XYShapes.shapeFromInt(engine.getShape()).type());
 					fill = true;
+				}
 				if(fill) {
+					g.setColor(c);
 					g.fillRect(1+3*(field.WIDTH - x - 1), 1+3*y, 3, 3);
-				} else if(engine.getGhost() != -1 && XYShapes.has(engine.getGhost(), x, y))
+				} else if(engine.getGhost() != -1 && XYShapes.has(engine.getGhost(), x, y)) {
+					c = shapeTypeColor.get(XYShapes.shapeFromInt(engine.getShape()).type());
+					g.setColor(c);
 					g.drawRect(2+3*(field.WIDTH - x - 1), 2+3*y, 0, 0);
-
+				}
 			}
 		}
 
@@ -133,9 +142,9 @@ public class EngineDraw {
 		ShapeType held = engine.getHold();
 		if(held != null)
 			drawShapeType(held, 58, 36);
-*/
 		
 		g.drawString("" + engine.getLines(), 12, 47);
+ */
 
 		if(engine.isOver()) {
 			int xo = 2;
