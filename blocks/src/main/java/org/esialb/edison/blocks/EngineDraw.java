@@ -134,8 +134,11 @@ public class EngineDraw {
 			}
 		}
 
+		g.setColor(Color.BLACK);
+		g.fillRect(76, 20, 20, 24);
 		g.setColor(Color.WHITE);
-		g.drawString("" + engine.getLines(), 80, 40);
+		g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 16));
+		g.drawString("" + engine.getLines(), 76, 44);
 
 		if(engine.isOver()) {
 			int xo = 2;
