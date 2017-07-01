@@ -126,12 +126,21 @@ public class EngineDraw {
 				}
 				if(fill) {
 					g.setColor(c);
-					g.fillRect(1+3*(field.WIDTH - x - 1), 1+3*y, 3, 3);
+					g.fillRect(1+3*x, 1+3*y, 3, 3);
 				} else if(engine.getGhost() != -1 && XYShapes.has(engine.getGhost(), x, y)) {
 //					c = shapeTypeColor.get(XYShapes.shapeFromInt(engine.getShape()).type());
 					c = Color.WHITE;
 					g.setColor(c);
-					g.drawRect(1+3*(field.WIDTH - x - 1), 1+3*y, 2, 2);
+					g.drawRect(1+3*x, 1+3*y, 2, 2);
+					g.setColor(Color.BLACK);
+					if(x > 0 && XYShapes.has(engine.getGhost(), x-1, y))
+						g.drawRect(1+3*x, 1+1+3*y, 0, 0);
+					if(x < engine.getField().WIDTH && XYShapes.has(engine.getGhost(), x+1, y))
+						g.drawRect(2+1+3*x, 1+1+3*y, 0, 0);
+					if(y > 0 && XYShapes.has(engine.getGhost(), x, y-1))
+						g.drawRect(1+1+3*x, 1+3*y, 0, 0);
+					if(y < engine.getField().HEIGHT && XYShapes.has(engine.getGhost(), x, y+1))
+						g.drawRect(1+1+3*x, 2+1+3*y, 0, 0);
 				}
 			}
 		}
@@ -185,7 +194,7 @@ public class EngineDraw {
 		int minY = 4, maxY = -1;
 		for(int ix = 0; ix < 4; ix++) {
 			for(int iy = 0; iy < 4; iy++) {
-				if(shape.has(3 - ix, iy)) {
+				if(shape.has(ix, iy)) {
 					minY = Math.min(minY, iy);
 					maxY = Math.max(maxY, iy);
 				}
@@ -197,7 +206,7 @@ public class EngineDraw {
 		
 		for(int ix = 0; ix < 4; ix++) {
 			for(int iy = 0; iy < 4; iy++) {
-				Color c = (shape.has(3 - ix, iy) ? shapeTypeColor.get(type) : Color.BLACK);
+				Color c = (shape.has(ix, iy) ? shapeTypeColor.get(type) : Color.BLACK);
 				Graphics2D g = gfxToImage.createGraphics();
 				g.setColor(c);
 				g.fillRect(x+6*ix, offsetY + y + 6*iy, 6, 6);

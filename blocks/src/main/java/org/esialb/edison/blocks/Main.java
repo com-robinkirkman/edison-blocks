@@ -140,13 +140,13 @@ public class Main {
 				draw.paint();
 			} else if(held.get(Button.LEFT) == 1)
 				c = Command.HARD_DROP;
-			else if(held.get(Button.UP) == 1)
-				c = Command.SHIFT_LEFT;
-			else if(held.get(Button.UP) > 10)
-				c = Command.AUTOSHIFT_LEFT;
 			else if(held.get(Button.DOWN) == 1)
-				c = Command.SHIFT_RIGHT;
+				c = Command.SHIFT_LEFT;
 			else if(held.get(Button.DOWN) > 10)
+				c = Command.AUTOSHIFT_LEFT;
+			else if(held.get(Button.UP) == 1)
+				c = Command.SHIFT_RIGHT;
+			else if(held.get(Button.UP) > 10)
 				c = Command.AUTOSHIFT_RIGHT;
 			else if(held.get(Button.B) == 1)
 				c = Command.ROTATE_RIGHT;
