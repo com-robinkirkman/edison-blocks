@@ -111,7 +111,7 @@ public class EngineDraw {
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 96, 64);
-		g.setColor(Color.WHITE);
+		g.setColor(Color.DARK_GRAY);
 		g.drawRect(0, 0, bw+1, bh+1);
 		for(int y = 0; y < field.HEIGHT; y++) {
 			for(int x = 0; x < field.WIDTH; x++) {
