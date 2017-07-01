@@ -59,9 +59,9 @@ public class EngineDraw {
 				else if(engine.getShape() != -1 && XYShapes.has(engine.getShape(), x, y))
 					fill = true;
 				if(fill) {
-					g.fillRect(1+3*y, 31 - (1+3*(field.WIDTH - x - 1)), 3, 3);
+					g.fillRect(1+3*y, 31 - (1+3*x), 3, 3);
 				} else if(engine.getGhost() != -1 && XYShapes.has(engine.getGhost(), x, y))
-					g.drawRect(2+3*y, 31 - (2+3*(field.WIDTH - x - 1)), 0, 0);
+					g.drawRect(2+3*y, 31 - (2+3*x), 0, 0);
 
 			}
 		}
@@ -131,8 +131,7 @@ public class EngineDraw {
 //					c = shapeTypeColor.get(XYShapes.shapeFromInt(engine.getShape()).type());
 					c = Color.WHITE;
 					g.setColor(c);
-					g.drawRect(1+3*x, 1+3*y, 2, 2);
-					g.setColor(Color.BLACK);
+					g.drawRect(1+1+3*x, 1+1+3*y, 0, 0);
 					if(x > 0 && XYShapes.has(engine.getGhost(), x-1, y))
 						g.drawRect(1+3*x, 1+1+3*y, 0, 0);
 					if(x < engine.getField().WIDTH && XYShapes.has(engine.getGhost(), x+1, y))
