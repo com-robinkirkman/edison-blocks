@@ -148,9 +148,9 @@ public class Main {
 				c = Command.SHIFT_RIGHT;
 			else if(held.get(Button.UP) > 10)
 				c = Command.AUTOSHIFT_RIGHT;
-			else if(held.get(Button.B) == 1)
-				c = Command.ROTATE_RIGHT;
 			else if(held.get(Button.A) == 1)
+				c = Command.ROTATE_RIGHT;
+			else if(held.get(Button.B) == 1)
 				c = Command.ROTATE_LEFT;
 			else if(held.get(Button.RIGHT) == 1)
 				c = Command.SHIFT_DOWN;
