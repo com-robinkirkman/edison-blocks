@@ -94,6 +94,7 @@ public class EngineDraw {
 	}
 	
 	private ShapeTypeColor shapeTypeColor = new ShapeTypeColor();
+	private BufferedImage gfxToImage;
 	private Image gfxFromImage;
 	
 	private void paintGfx() {
@@ -105,8 +106,8 @@ public class EngineDraw {
 		int bh = 3 * field.HEIGHT;
 		int bw = 3 * field.WIDTH;
 		
-		BufferedImage toImage = new BufferedImage(96, 64, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = toImage.createGraphics();
+		gfxToImage = new BufferedImage(96, 64, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = gfxToImage.createGraphics();
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 96, 64);
@@ -155,8 +156,6 @@ public class EngineDraw {
 			g.drawRect(xo + 0, yo + 0, w + 1, h - 1);
 			g.drawString("Game Over", xo + 2, yo + h - g.getFontMetrics().getDescent());
 		}
-		
-		gfxFromImage = gfx.drawImage(toImage, gfxFromImage);
 
 		ShapeType[] next = engine.getNext();
 		if(next.length > 0 && next[0] != null)
@@ -165,6 +164,8 @@ public class EngineDraw {
 		ShapeType held = engine.getHold();
 		if(held != null)
 			drawShapeTypeGfx(held, 40, 36);
+		
+		gfxFromImage = gfx.drawImage(gfxToImage, gfxFromImage);
 		
 	}
 	
@@ -196,7 +197,9 @@ public class EngineDraw {
 		for(int ix = 0; ix < 4; ix++) {
 			for(int iy = 0; iy < 4; iy++) {
 				Color c = (shape.has(3 - ix, iy) ? shapeTypeColor.get(type) : Color.BLACK);
-				gfx.fillRect(x+6*ix, offsetY + y + 6*iy, 6, 6, c);
+				Graphics2D g = gfxToImage.createGraphics();
+				g.setColor(c);
+				g.fillRect(x+6*ix, offsetY + y + 6*iy, 6, 6);
 			}
 		}
 	}
